@@ -54,11 +54,12 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public Url getEncodedUrl(String url) {
-        return null;
+        Url urlToRet = urlRepository.findByShortLink(url);
+        return urlToRet;
     }
 
     @Override
     public void deleteShortLink(Url url) {
-
+        urlRepository.delete(url);
     }
 }
