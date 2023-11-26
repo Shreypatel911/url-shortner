@@ -2,10 +2,11 @@ package com.example.urlshortner.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "shorted-url")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,10 +14,7 @@ import java.time.LocalDateTime;
 @Data
 public class Url {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
-    @Lob
+    private String id;
     private String originalLink;
     private String shortLink;
     private LocalDateTime createdDate;

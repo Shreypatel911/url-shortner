@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class UrlServiceImpl implements UrlService {
     @Autowired
     private UrlRepository urlRepository;
+
     private String encodeUrl(String url){
         String encodeUrl = "";
         LocalDateTime time = LocalDateTime.now();
@@ -54,8 +55,9 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public Url getEncodedUrl(String url) {
-        Url urlToRet = urlRepository.findByShortLink(url);
-        return urlToRet;
+//        Url urlToRet = urlRepository.findByShortLink(url);
+//        return urlToRet;
+        return null;
     }
 
     @Override
