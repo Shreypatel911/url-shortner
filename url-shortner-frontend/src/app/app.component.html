@@ -1,0 +1,27 @@
+<!-- src/app/url-shortener.component.html -->
+
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>URL Shortener</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="urlForm" (ngSubmit)="shortenUrl()">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter Long URL:</mat-label>
+          <input matInput formControlName="longUrl" placeholder="https://example.com" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="!urlForm.valid">
+          Shorten
+        </button>
+      </form>
+
+      <div *ngIf="shortenedUrl" class="result-container">
+        <p class="result-label">Shortened URL:</p>
+        <a href="#" (click)="openShorterUrl()">{{ shortenedUrl }}</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

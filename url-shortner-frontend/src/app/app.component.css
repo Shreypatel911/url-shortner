@@ -1,0 +1,17 @@
+/* src/app/url-shortener.component.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .result-container {
+    margin-top: 20px;
+  }
+  
+  .result-label {
+    font-weight: bold;
+  }
+  
