@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-@CrossOrigin
+@CrossOrigin("*")
 @Controller
 public class UrlShortnerController {
     @Autowired
