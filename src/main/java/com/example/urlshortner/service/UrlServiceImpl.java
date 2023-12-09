@@ -42,7 +42,7 @@ public class UrlServiceImpl implements UrlService {
 
     private LocalDateTime generateExpirationDate(String expirationDate, LocalDateTime createdDate) {
         if(StringUtils.isBlank(expirationDate))
-            return createdDate.plusSeconds(120);
+            return createdDate.plusSeconds(300);
         LocalDateTime date = LocalDateTime.parse(expirationDate);
         return date;
     }
@@ -55,9 +55,8 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public Url getEncodedUrl(String url) {
-//        Url urlToRet = urlRepository.findByShortLink(url);
-//        return urlToRet;
-        return null;
+        Url urlToRet = urlRepository.findByShortLink(url);
+        return urlToRet;
     }
 
     @Override
