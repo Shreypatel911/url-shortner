@@ -2,26 +2,40 @@
 
 <div class="container">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>URL Shortener</mat-card-title>
-    </mat-card-header>
-
     <mat-card-content>
-      <form [formGroup]="urlForm" (ngSubmit)="shortenUrl()">
-        <mat-form-field appearance="fill">
-          <mat-label>Enter Long URL:</mat-label>
-          <input matInput formControlName="longUrl" placeholder="https://example.com" />
-        </mat-form-field>
+      <form [formGroup]="urlForm" (ngSubmit)="shortenUrl()" class="form-container">
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter Long URL:</mat-label>
+            <input matInput formControlName="longUrl" placeholder="https://example.com" />
+            <mat-error *ngIf="urlForm.get('longUrl').hasError('pattern') && urlForm.get('longUrl').touched">
+              Please enter a valid URL
+            </mat-error>
+            <mat-error *ngIf="urlForm.get('longUrl').hasError('required') && urlForm.get('longUrl').touched">
+              Long URL is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="!urlForm.valid">
-          Shorten
-        </button>
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter alias:</mat-label>
+            <input matInput formControlName="alias"/>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field" *ngIf="urlForm.get('shortUrl').value !== null">
+          <mat-form-field appearance="fill">
+            <input [disabled]="true" matInput formControlName="shortUrl" placeholder="Custom Short URL" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-field">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!urlForm.valid">
+            Shorten URL
+          </button>
+        </div>
       </form>
-
-      <div *ngIf="shortenedUrl" class="result-container">
-        <p class="result-label">Shortened URL:</p>
-        <a href="#" (click)="openShorterUrl()">{{ shortenedUrl }}</a>
-      </div>
     </mat-card-content>
   </mat-card>
 </div>

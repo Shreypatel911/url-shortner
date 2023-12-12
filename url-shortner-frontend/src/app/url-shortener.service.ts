@@ -11,8 +11,8 @@ export class UrlShortenerService {
 
   constructor(private http : HttpClient) { }
 
-  shortenUrl(url: string): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/generate`, { url });
+  shortenUrl(url: string, alias : string): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/generate`, { url, alias });
   }
 
   openShorterUrl(shortUrl: string): Observable<any> {

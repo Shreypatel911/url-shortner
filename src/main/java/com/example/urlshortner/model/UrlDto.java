@@ -8,4 +8,5 @@ import lombok.Setter;
 public class UrlDto {
     private String url;
     private String expirationDate;
+    private String alias;
 }

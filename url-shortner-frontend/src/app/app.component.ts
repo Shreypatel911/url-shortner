@@ -10,7 +10,6 @@ import { UrlShortenerService } from './url-shortener.service';
 
 export class AppComponent {
   urlForm: FormGroup;
-  shortenedUrl: string;
   shortenedUrlHash : string;
 
   constructor(
@@ -20,17 +19,22 @@ export class AppComponent {
 
   ngOnInit() {
     this.urlForm = this.formBuilder.group({
-      longUrl: ['', [Validators.required, Validators.pattern(/^https?:\/\//)]],
+      longUrl : ['', [Validators.required, Validators.pattern(/^https?:\/\//)]],
+      shortUrl : [null],
+      alias : ['']
     });
+
+    this.urlForm.get('shortUrl').disable();
   }
 
   shortenUrl() {
     if (this.urlForm.valid) {
       const longUrl = this.urlForm.get('longUrl').value;
-      this.urlShortenerService.shortenUrl(longUrl).subscribe(
+      const alias  = this.urlForm.get('alias').value;
+      this.urlShortenerService.shortenUrl(longUrl, alias).subscribe(
         (reponse) => {
           console.log(reponse);
-          this.shortenedUrl = 'http://localhost:8080/' + reponse['shortUrl'];
+          this.urlForm.get('shortUrl').setValue('http://localhost:8080/' + reponse['shortUrl']);
           this.shortenedUrlHash = reponse['shortUrl'];
         },
         (error) => {
