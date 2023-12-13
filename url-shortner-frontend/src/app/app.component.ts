@@ -11,6 +11,7 @@ import { UrlShortenerService } from './url-shortener.service';
 export class AppComponent {
   urlForm: FormGroup;
   shortenedUrlHash : string;
+  isAliasValid : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +34,13 @@ export class AppComponent {
       const alias  = this.urlForm.get('alias').value;
       this.urlShortenerService.shortenUrl(longUrl, alias).subscribe(
         (reponse) => {
-          console.log(reponse);
-          this.urlForm.get('shortUrl').setValue('http://localhost:8080/' + reponse['shortUrl']);
-          this.shortenedUrlHash = reponse['shortUrl'];
+          if(reponse['status'] === undefined){
+            this.urlForm.get('shortUrl').setValue('http://localhost:8080/' + reponse['shortUrl']);
+            this.shortenedUrlHash = reponse['shortUrl'];
+          }else if(reponse['status'] === "400"){
+            this.isAliasValid = true;
+            console.log(this.isAliasValid);
+          }
         },
         (error) => {
           console.error('Error shortening URL:', error);
@@ -45,7 +50,6 @@ export class AppComponent {
   }
 
   openShorterUrl() {
-    console.log("on click");
     this.urlShortenerService.openShorterUrl(this.shortenedUrlHash).subscribe(
       (response) => {
       
@@ -55,4 +59,7 @@ export class AppComponent {
       })
   }
 
+  openLink(){
+
+  }
 }

@@ -23,14 +23,20 @@
             <input matInput formControlName="alias"/>
           </mat-form-field>
         </div>
+        <mat-error *ngIf="isAliasValid">Alias is not available.</mat-error>
 
         <div class="form-field" *ngIf="urlForm.get('shortUrl').value !== null">
           <mat-form-field appearance="fill">
-            <input [disabled]="true" matInput formControlName="shortUrl" placeholder="Custom Short URL" />
+            <input matInput formControlName="shortUrl" placeholder="Custom Short URL" />
           </mat-form-field>
         </div>
-
-        <div class="form-field">
+        <div class="form-field" *ngIf="urlForm.get('shortUrl').value !== null">
+          <button mat-raised-button color="primary" (click)="openLink()">
+            Open Link
+          </button>
+        </div>
+        
+        <div class="form-field" style="margin-top: 8px;">
           <button mat-raised-button color="primary" type="submit" [disabled]="!urlForm.valid">
             Shorten URL
           </button>

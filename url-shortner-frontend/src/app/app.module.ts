@@ -9,12 +9,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule
 import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule
 import { MatInputModule } from '@angular/material/input';
-import { TestComponent } from './test/test.component'; // Import MatInputModule
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
   ],
   imports: [
     BrowserModule,

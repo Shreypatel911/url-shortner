@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class UrlServiceImpl implements UrlService {
@@ -27,7 +28,17 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public Url generateShortLink(UrlDto urlDto) {
         if(StringUtils.isNotEmpty(urlDto.getUrl())){
-            String encodeUrl = encodeUrl(urlDto.getUrl());
+            String encodeUrl = "";
+            if(StringUtils.isNotEmpty(urlDto.getAlias())) {
+                List<Url> allDocuments = urlRepository.findAll();
+                for(Url url : allDocuments){
+                    if(url.getShortLink().equals(urlDto.getAlias()))
+                        return null;
+                }
+                encodeUrl = urlDto.getAlias();
+            }
+            else
+                encodeUrl = encodeUrl(urlDto.getUrl());
             Url finalUrlObj = new Url();
             finalUrlObj.setCreatedDate(LocalDateTime.now());
             finalUrlObj.setOriginalLink(urlDto.getUrl());
