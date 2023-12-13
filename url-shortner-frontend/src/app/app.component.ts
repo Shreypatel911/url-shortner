@@ -37,10 +37,8 @@ export class AppComponent {
           if(reponse['status'] === undefined){
             this.urlForm.get('shortUrl').setValue('http://localhost:8080/' + reponse['shortUrl']);
             this.shortenedUrlHash = reponse['shortUrl'];
-          }else if(reponse['status'] === "400"){
+          }else if(reponse['status'] === "400")
             this.isAliasValid = true;
-            console.log(this.isAliasValid);
-          }
         },
         (error) => {
           console.error('Error shortening URL:', error);
