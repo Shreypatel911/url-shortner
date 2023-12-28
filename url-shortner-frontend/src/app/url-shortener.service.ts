@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class UrlShortenerService {
   
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'http://34.16.188.244:8080';
+  // private apiUrl = 'http://localhost:8080';
 
   constructor(private http : HttpClient) { }
 
