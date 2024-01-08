@@ -7,16 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class UrlShortenerService {
   
-  private apiUrl = 'http://34.16.188.244:8080';
+  private apiUrl = 'https://springapi-66gap7pnaa-uc.a.run.app';
   // private apiUrl = 'http://localhost:8080';
 
   constructor(private http : HttpClient) { }
 
   shortenUrl(url: string, alias : string): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}/generate`, { url, alias });
-  }
-
-  openShorterUrl(shortUrl: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${shortUrl}`);
   }
 }

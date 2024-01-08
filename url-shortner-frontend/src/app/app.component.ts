@@ -35,8 +35,9 @@ export class AppComponent {
       this.urlShortenerService.shortenUrl(longUrl, alias).subscribe(
         (reponse) => {
           if(reponse['status'] === undefined){
-            this.urlForm.get('shortUrl').setValue('http://localhost:8080/' + reponse['shortUrl']);
+            this.urlForm.get('shortUrl').setValue('https://springapi-66gap7pnaa-uc.a.run.app/' + reponse['shortUrl']);
             this.shortenedUrlHash = reponse['shortUrl'];
+            this.urlForm.get('longUrl').disable();
           }else if(reponse['status'] === "400")
             this.isAliasValid = true;
         },
@@ -48,16 +49,6 @@ export class AppComponent {
   }
 
   openShorterUrl() {
-    this.urlShortenerService.openShorterUrl(this.shortenedUrlHash).subscribe(
-      (response) => {
-      
-      },
-      (error) => {
-        console.error('Error shortening URL:', error);
-      })
-  }
-
-  openLink(){
-
+    window.open(this.urlForm.get('shortUrl').value, '_blank');
   }
 }
