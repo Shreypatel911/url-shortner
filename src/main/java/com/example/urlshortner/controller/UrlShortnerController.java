@@ -63,14 +63,15 @@ public class UrlShortnerController {
             return new ResponseEntity<>(urlErrorResponseDto, HttpStatus.OK);
         }
 
-        if(url.getExpirationDate().isBefore(LocalDateTime.now())){
-            urlService.deleteShortLink(url);
-            UrlErrorResponseDto urlErrorResponseDto = new UrlErrorResponseDto();
-            urlErrorResponseDto.setStatus("400");
-            urlErrorResponseDto.setError("This url is expired");
-
-            return new ResponseEntity<>(urlErrorResponseDto, HttpStatus.OK);
-        }
+        //check for expiration date
+//        if(url.getExpirationDate().isBefore(LocalDateTime.now())){
+//            urlService.deleteShortLink(url);
+//            UrlErrorResponseDto urlErrorResponseDto = new UrlErrorResponseDto();
+//            urlErrorResponseDto.setStatus("400");
+//            urlErrorResponseDto.setError("This url is expired");
+//
+//            return new ResponseEntity<>(urlErrorResponseDto, HttpStatus.OK);
+//        }
 
         response.sendRedirect(url.getOriginalLink());
         return null;
